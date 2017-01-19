@@ -1,0 +1,7 @@
+---
+- hosts: "{{ host_list }}"
+  tasks:
+    - name: simulate long running op, allow to run for 45 sec, fire and forget
+      shell: ls /tmp
+      register: result
+    - debug: msg={{ result }}

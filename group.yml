@@ -1,0 +1,7 @@
+---
+- hosts: webserver
+  tasks:
+    - debug: msg="{{ item.0 }} and {{ item.1 }}"
+      with_together:
+        - " alpha "
+        - " numbers "

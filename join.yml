@@ -1,0 +1,8 @@
+- name: join loop
+  hosts: all
+  vars:
+     port: 1331
+  tasks:
+    - template: src=roles/join/templates/list.j2 dest=/tmp/list.txt
+  roles:
+    - { role: join }

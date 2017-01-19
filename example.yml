@@ -1,0 +1,8 @@
+#    - name: set variable
+#      echopong: get_facts=yes
+#    - name: set envirement var
+#     # lineinfile: dest=/tmp/a regexp=^SELINUX= line=SELINUX={{ ansible_private_ipv4_address }}
+#      lineinfile: dest=/tmp/a regexp=^SELINUX= line=SELINUX={{ a }}
+#    - name: "Copy the configuration file"
+##      command: touch /tmp/b111
+#      command: touch /tmp/c1111
