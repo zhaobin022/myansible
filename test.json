@@ -1,0 +1,234 @@
+{
+  'failed': {},
+  'success': {
+    'oggsource01': {
+      'invocation': {
+        'module_name': u
+        'debug',
+        'module_args': {
+          u
+          'msg': {
+            u
+            'changed': True,
+            u
+            'end': u
+            '2017-01-19 13:53:11.689619',
+            u
+            'stdout': u
+            'aaa\nansible_Nt6Ixk\nb\nbbb\nc\nc1111\nkeyring-lqGLA5\norbit-gdm\npulse-KruodgIk9UqG\npulse-okRfg8PtcEAg',
+            u
+            'cmd': u
+            'ls /tmp',
+            u
+            'rc': 0,
+            u
+            'start': u
+            '2017-01-19 13:53:11.686374',
+            u
+            'stderr': u
+            '',
+            u
+            'delta': u
+            '0:00:00.003245',
+            'stdout_lines': [
+              u
+              'aaa',
+              u
+              'ansible_Nt6Ixk',
+              u
+              'b',
+              u
+              'bbb',
+              u
+              'c',
+              u
+              'c1111',
+              u
+              'keyring-lqGLA5',
+              u
+              'orbit-gdm',
+              u
+              'pulse-KruodgIk9UqG',
+              u
+              'pulse-okRfg8PtcEAg'
+            ],
+            u
+            'warnings': []
+          }
+        }
+      },
+      'msg': {
+        u
+        'changed': True,
+        u
+        'end': u
+        '2017-01-19 13:53:11.689619',
+        u
+        'stdout': u
+        'aaa\nansible_Nt6Ixk\nb\nbbb\nc\nc1111\nkeyring-lqGLA5\norbit-gdm\npulse-KruodgIk9UqG\npulse-okRfg8PtcEAg',
+        u
+        'cmd': u
+        'ls /tmp',
+        u
+        'rc': 0,
+        u
+        'start': u
+        '2017-01-19 13:53:11.686374',
+        u
+        'stderr': u
+        '',
+        u
+        'delta': u
+        '0:00:00.003245',
+        'stdout_lines': [
+          u
+          'aaa',
+          u
+          'ansible_Nt6Ixk',
+          u
+          'b',
+          u
+          'bbb',
+          u
+          'c',
+          u
+          'c1111',
+          u
+          'keyring-lqGLA5',
+          u
+          'orbit-gdm',
+          u
+          'pulse-KruodgIk9UqG',
+          u
+          'pulse-okRfg8PtcEAg'
+        ],
+        u
+        'warnings': []
+      },
+      'changed': False,
+      '_ansible_verbose_always': True,
+      '_ansible_no_log': False
+    },
+    'oggtarget01': {
+      'invocation': {
+        'module_name': u
+        'debug',
+        'module_args': {
+          u
+          'msg': {
+            u
+            'changed': True,
+            u
+            'end': u
+            '2017-01-19 13:53:11.696231',
+            u
+            'stdout': u
+            'a\naaa\nansible_EBAnIA\nb\nbbb\nbin\nc\nc1111\nkeyring-9HJDIg\nkeyring-F5p2qL\norbit-gdm\npulse-KruodgIk9UqG\npulse-okRfg8PtcEAg',
+            u
+            'cmd': u
+            'ls /tmp',
+            u
+            'rc': 0,
+            u
+            'start': u
+            '2017-01-19 13:53:11.692395',
+            u
+            'stderr': u
+            '',
+            u
+            'delta': u
+            '0:00:00.003836',
+            'stdout_lines': [
+              u
+              'a',
+              u
+              'aaa',
+              u
+              'ansible_EBAnIA',
+              u
+              'b',
+              u
+              'bbb',
+              u
+              'bin',
+              u
+              'c',
+              u
+              'c1111',
+              u
+              'keyring-9HJDIg',
+              u
+              'keyring-F5p2qL',
+              u
+              'orbit-gdm',
+              u
+              'pulse-KruodgIk9UqG',
+              u
+              'pulse-okRfg8PtcEAg'
+            ],
+            u
+            'warnings': []
+          }
+        }
+      },
+      'msg': {
+        u
+        'changed': True,
+        u
+        'end': u
+        '2017-01-19 13:53:11.696231',
+        u
+        'stdout': u
+        'a\naaa\nansible_EBAnIA\nb\nbbb\nbin\nc\nc1111\nkeyring-9HJDIg\nkeyring-F5p2qL\norbit-gdm\npulse-KruodgIk9UqG\npulse-okRfg8PtcEAg',
+        u
+        'cmd': u
+        'ls /tmp',
+        u
+        'rc': 0,
+        u
+        'start': u
+        '2017-01-19 13:53:11.692395',
+        u
+        'stderr': u
+        '',
+        u
+        'delta': u
+        '0:00:00.003836',
+        'stdout_lines': [
+          u
+          'a',
+          u
+          'aaa',
+          u
+          'ansible_EBAnIA',
+          u
+          'b',
+          u
+          'bbb',
+          u
+          'bin',
+          u
+          'c',
+          u
+          'c1111',
+          u
+          'keyring-9HJDIg',
+          u
+          'keyring-F5p2qL',
+          u
+          'orbit-gdm',
+          u
+          'pulse-KruodgIk9UqG',
+          u
+          'pulse-okRfg8PtcEAg'
+        ],
+        u
+        'warnings': []
+      },
+      'changed': False,
+      '_ansible_verbose_always': True,
+      '_ansible_no_log': False
+    }
+  },
+  'unreachable': {}
+}

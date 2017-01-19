@@ -76,7 +76,7 @@ class AnsibleApi2(object):
                                become_user='root', ask_value_pass=False, verbosity=None, check=False, listhosts=False,
                                listtasks=False, listtags=False, syntax=False)
         self.passwords = {}
-        self.host_list = ['oggsource01', 'oggtarget01','bindesktop01']
+        self.host_list = ['oggsource01', 'oggtarget01']
         self.inventory = Inventory(loader=self.loader, variable_manager=self.variable_manager,host_list=[])
         self.init_inventory()
         self.variable_manager.set_inventory(self.inventory)
@@ -108,7 +108,7 @@ class AnsibleApi2(object):
             gather_facts='no',
             tasks=[
                 # dict(action=dict(module='ls')),
-                dict(action=dict(module='raw',args='touch /tmp/aaa'))
+                dict(action=dict(module='raw',args='touch /tmp/ccc'))
             ]
         )
         play = Play().load(play_source, variable_manager=self.variable_manager, loader=self.loader)
@@ -174,4 +174,5 @@ class AnsibleApi2(object):
 if __name__ == '__main__':
     ansible_handler = AnsibleApi2()
     ansible_handler.run_playbook()
+    # ansible_handler.run_module()
     print ansible_handler.get_result()

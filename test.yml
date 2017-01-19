@@ -1,7 +1,9 @@
 ---
 - hosts: "{{ host_list }}"
+#- hosts: "oggtarget01,oggsource01"
+#- hosts: "oggtarget01"
   tasks:
     - name: simulate long running op, allow to run for 45 sec, fire and forget
-      shell: ls /tmp
+      shell: touch /tmp/ccc
       register: result
     - debug: msg={{ result }}
