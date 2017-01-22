@@ -1,0 +1,7 @@
+[dbservers]
+oggsource: ansible_ssh_port=22 ansible_ssh_host=192.168.29.35 ansible_ssh_user=root ansible_ssh_pass=rootroot
+oggtarget: ansible_ssh_port=22 ansible_ssh_host=192.168.29.37 ansible_ssh_user=root ansible_ssh_pass=rootroot
+
+[webserver]
+bindesktop: ansible_ssh_port=22 ansible_ssh_host=192.168.29.28 ansible_ssh_user=root ansible_ssh_pass=123abc,.
+
