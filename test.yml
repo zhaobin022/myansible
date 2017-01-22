@@ -1,9 +1,54 @@
 ---
-- hosts: "{{ host_list }}"
+#- hosts: "{{ host_list }}"
 #- hosts: "oggtarget01,oggsource01"
-#- hosts: "oggtarget01"
+- hosts: "all"
   tasks:
-    - name: simulate long running op, allow to run for 45 sec, fire and forget
-      shell: touch /tmp/ccc
-      register: result
-    - debug: msg={{ result }}
+    - echopong: get_facts=yes args='111'
+    - debug: msg={{ ansible_private_ipv4_address }}------------{{ args }}
+#    - lineinfile:
+#        dest: /etc/httpd/conf/httpd.conf
+#        regexp: '^Listen '
+#        insertafter: '^#Listen '
+#        line: 'Listen 8080'
+
+#  tasks:
+#    - name: simulate long running op, allow to run for 45 sec, fire and forget
+#      shell: touch /tmp/ccc
+#      register: result
+#    - debug: msg={{ result }}
+
+
+#  vars:
+#    contents: "{{ lookup('file', '/etc/hosts') }}"
+#  tasks:
+#    - name: give users access to multiple databases
+#      debug: msg={{ item[0] }} {{ item[1] }}
+#      with_nested:
+#        - [ 'alice', 'bob' ]
+#        - [ 'clientdb', 'employeedb', 'providerdb' ]
+#    - name: Example of looping over a command result
+#      shell: echo {{ item }}
+#      with_lines: ls /tmp
+
+#    - name: indexed loop demo
+#      debug: msg="at array position {{ item.0 }} there is a value {{ item.1 }}"
+#      with_indexed_items: ['a','b','c']
+
+
+#  # show all the hosts in the inventory
+#  - debug: msg={{ item }}
+#    with_items: "{{ groups['all'] }}"
+#
+#  # show all the hosts in the current play
+#  - debug: msg={{ item }}
+#    with_items: "{{ play_hosts }}"
+
+
+#    - cron: name="check dirs1" minute="0" hour="5,1" job="ls -alh > /dev/null"
+#    - cron: name=PATH env=yes value=/opt/bin state=absent
+
+
+# Add a line to a file if it does not exist, without passing regexp
+#    - lineinfile:
+#        path: /tmp/testfile
+#        line: '192.168.1.99 foo.lab.net foo'

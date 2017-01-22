@@ -1,0 +1,10 @@
+2017-01-20 14:41:31,882 - simple_example - DEBUG - debug message
+2017-01-20 14:41:31,882 - simple_example - INFO - info message
+2017-01-20 14:41:31,882 - simple_example - WARNING - warn message
+2017-01-20 14:41:31,882 - simple_example - ERROR - error message
+2017-01-20 14:41:31,882 - simple_example - CRITICAL - critical message
+2017-01-20 14:50:04,994 - simple_example - DEBUG - debug message
+2017-01-20 14:50:04,994 - simple_example - INFO - info message
+2017-01-20 14:50:04,994 - simple_example - WARNING - warn message
+2017-01-20 14:50:04,995 - simple_example - ERROR - error message
+2017-01-20 14:50:04,995 - simple_example - CRITICAL - critical message

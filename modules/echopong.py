@@ -28,7 +28,7 @@ def main():
 
     ansible_facts_dict = {
         "changed" : False,
-        "rc": 0,
+        # "rc": 0,
         "ansible_facts": {
             }
     }
