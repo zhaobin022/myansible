@@ -23,5 +23,23 @@
 # logger.error("error message")
 # logger.critical("critical message")
 
-from . import read_hosts
+# from . import read_hosts
 
+
+
+class People(object):
+    def __init__(self,name):
+        self.name = name
+
+    def sleep(self):
+        print self.name
+class Man(People):
+
+
+    def sleep(self):
+        super(Man,self).sleep()
+
+
+
+m = Man("zhangsan")
+m.sleep()
