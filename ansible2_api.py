@@ -12,6 +12,8 @@ from ansible.executor.playbook_executor import PlaybookExecutor
 import os
 import sys
 import json
+import ConfigParser
+from ConfigParser import DEFAULTSECT
 
 
 class ResultsCollector(CallbackBase):
@@ -33,81 +35,41 @@ class ResultsCollector(CallbackBase):
 
 class AnsibleApi2(object):
     def __init__(self):
-        # self.host_info_dic = {
-        #     'dbservers': {
-        #         # 'hosts': ['oggsource', 'oggtarget','bindesktop'],
-        #         'hosts': ['oggsource01', 'oggtarget01', 'bindesktop01'],
-        #         # 'vars': {
-        #         #     'ansible_ssh_user': 'vagrant',
-        #         #     'ansible_ssh_private_key_file':
-        #         #         '~/.vagrant.d/insecure_private_key',
-        #         #     'example_variable': 'value'
-        #         # }
-        #     },
-        #     '_meta': {
-        #         'hostvars': {
-        #             'oggsource01': {
-        #                 "ansible_ssh_user": "root",
-        #                 "ansible_ssh_pass": "rootroot"
-        #             },
-        #             'oggtarget01': {
-        #                 "ansible_ssh_user": "root",
-        #                 "ansible_ssh_pass": "rootroot"
-        #             },
-        #             'bindesktop01': {
-        #                 "ansible_ssh_user": "root",
-        #                 "ansible_ssh_pass": "123abc,.",
-        #                 "a": "b"
-        #             }
-        #         }
-        #     }
-        # }
-        print $deployapps
-        print $jobname
-        print $envid
-        self.host_file_path = 'hosts/b-hosts'
+        self.tags_str = 'start,stop'
+        self.host_file_path = 'hosts/all-hosts'
         self.Options = namedtuple('Options', ['connection','module_path', 'forks', 'timeout',  'remote_user',
                 'ask_pass', 'private_key_file', 'ssh_common_args', 'ssh_extra_args', 'sftp_extra_args',
                 'scp_extra_args', 'become', 'become_method', 'become_user', 'ask_value_pass', 'verbosity',
-                'check', 'listhosts', 'listtasks', 'listtags', 'syntax'])
-        self.variable_manager = VariableManager()
-        self.loader = DataLoader()
+                'check', 'listhosts', 'listtasks', 'listtags', 'syntax','tags'])
 
-        # self.variable_manager.add_group_vars_file()
         self.options = self.Options(connection='smart', module_path=None, forks=100, timeout=10,
                                remote_user='root', ask_pass=False, private_key_file=None, ssh_common_args=None,
                                ssh_extra_args=None,
                                sftp_extra_args=None, scp_extra_args=None, become=None, become_method=None,
                                become_user='root', ask_value_pass=False, verbosity=None, check=False, listhosts=False,
-                               listtasks=False, listtags=False, syntax=False)
+                               listtasks=False, listtags=False, syntax=False,tags=self.tags_str)
+
+        # self.Options = namedtuple('Options', ['listhosts', 'listtasks','forks', 'become', 'become_method', 'become_user', 'check'])
+        # self.options = self.Options(listhosts=False, listtasks=True, forks=10, become=None, become_method=None, become_user='root', check=False)
+
+
+        self.variable_manager = VariableManager()
+        self.loader = DataLoader()
+
+        # self.variable_manager.add_group_vars_file()
+
         self.passwords = {}
-        self.host_list = self.host_file_path
+        self.host_list = ['server02',]
         self.group_var_file_path = 'group_vars/all'
         # self.group_var_file_path = 'group_vars/all_84'
 
         self.variable_manager.add_group_vars_file(self.group_var_file_path,self.loader)
-        print self.variable_manager._group_vars_files
-        self.inventory = Inventory(loader=self.loader, variable_manager=self.variable_manager,host_list=self.host_list)
+        # print self.variable_manager._group_vars_files
+        self.inventory = Inventory(loader=self.loader, variable_manager=self.variable_manager,host_list=self.host_file_path)
         # self.init_inventory()
         self.variable_manager.set_inventory(self.inventory)
         self.results_callback = ResultsCollector()
 
-
-    # def init_inventory(self):
-        # for  k, v in self.host_info_dic.items():
-        #     if k != '_meta':
-        #         group_name = k
-        #         group_dic = v
-        #         group = Group(name=group_name)
-        #         for host_name in v['hosts']:
-        #             host = Host(name=host_name)
-        #             host.set_variable('ansible_ssh_host', host_name)
-        #             host.set_variable('ansible_ssh_user', self.host_info_dic['_meta']['hostvars'][host_name]['ansible_ssh_user'])
-        #             host.set_variable('ansible_ssh_pass', self.host_info_dic['_meta']['hostvars'][host_name]['ansible_ssh_pass'])
-        #             group.add_host(host)
-        #         self.inventory.add_group(group)
-
-        # print self.inventory.get_group_dict()
 
 
 
@@ -145,9 +107,11 @@ class AnsibleApi2(object):
               run ansible palybook
               """
         extra_vars = {}  # 额外的参数 sudoers.yml以及模板中的参数，它对应ansible-playbook test.yml --extra-vars "host='aa' name='cc' "
+
         host_list_str = ','.join([item for item in self.host_list])
-        # extra_vars['host_list'] = host_list_str
         playbook_path = 'test.yml'  # modify here, change playbook
+        print host_list_str
+        extra_vars["host_list"] = host_list_str
         self.variable_manager.extra_vars=extra_vars
         # variable_manager.extra_vars = {"test": "pong111111111111111",} # modify here, This can accomodate various other command line arguments.`
         if not os.path.exists(playbook_path):
@@ -162,7 +126,7 @@ class AnsibleApi2(object):
             variable_manager=self.variable_manager,
             loader=self.loader,
             options=self.options,
-            passwords=passwords
+            passwords=passwords,
         )
 
         executor._tqm._stdout_callback = self.results_callback
@@ -181,9 +145,63 @@ class AnsibleApi2(object):
 
         return self.results_raw
 
+
+class KconfigParser(ConfigParser.RawConfigParser):
+
+
+    def read_config(self,config_file_path):
+        data = {}
+        self.read(config_file_path)
+        sections = self._sections
+        for section in sections:
+            data[section] = {}
+            for var in sections[section].items():
+                if var[0] == '__name__':continue
+                data[section][var[0]] = var[1].split()
+
+        return data
+
+
+
+
+#
+# def compare_input_app_with_common_config(apps_list,result_dict):
+#
+#     config = KconfigParser()
+#     app_config_dict = config.read_config(app_config_file_path)
+#     java_apps_list = app_config_dict['java_and_web_catalog']['javaapps']
+#     web_apps_list = app_config_dict['java_and_web_catalog']['webapps']
+#     result_dict['apply_java_apps'] = []
+#     result_dict['apply_web_apps'] = []
+#     for var in apps_list:
+#         if var in java_apps_list:
+#             result_dict['apply_java_apps'].append(var)
+#         elif var in web_apps_list:
+#             result_dict['apply_web_apps'].append(var)
+
+
+
+
 if __name__ == '__main__':
     ansible_handler = AnsibleApi2()
     ansible_handler.run_playbook()
-    # ansible_handler.run_module()
     print ansible_handler.get_result()
-    # ansible_handler.get_result()
+    # if len(sys.argv) != 4:
+    #     print 'Please input the right parameter !'
+    #     print sys.argv
+    #     sys.exit(1)
+    #
+    # apps_str = sys.argv[1]
+    # operation = sys.argv[2]
+    # env_id = sys.argv[3]
+    # app_config_file_path = 'common.properties'
+    #
+    #
+    # apps_list = apps_str.split(',')
+    # apply_app_dict = {}
+    #
+    #
+    # compare_input_app_with_common_config(apps_list,apply_app_dict)
+    # print apply_app_dict
+    #
+    #
