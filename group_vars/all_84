@@ -1,0 +1,191 @@
+#############last.version
+last.version: v3_3.3.8.3
+###basedir
+basedir: /home/pmes/pmes
+### activemq_url
+activemq_url: failover:(tcp://10.12.2.84:61616,tcp://10.12.2.84:61616)?randomize=true&timeout=10000
+
+####AESKey
+AESKey: hhsdiw72sc52hs6d
+fmAESKey: hhsdiw72sc52hs6d
+ftpKey: hsddiw72sc52hs6g
+
+### server ip
+
+memcache1_ip: 10.12.2.84
+memcache1_port: 11211
+memcache2_ip: 10.12.2.84
+memcache2_port: 11211
+
+#-------tradeweb
+tradecache1_ip: 10.12.2.84
+tradecache1_port: 18010
+tradecache2_ip: 10.12.2.84
+tradecache2_port: 28010
+
+#-------tradeweb
+firmPlatform1_ip: 10.12.2.84
+firmPlatform1_port: 8811
+firmPlatform2_ip: 10.12.2.84
+firmPlatform2_port: 8811
+
+#-------tradeweb
+money1_ip: 10.12.2.84
+money1_port: 8811
+money2_ip: 10.12.2.84
+money2_port: 8811
+
+#-------sessionserver
+sms1_ip: 10.12.9.102
+sms1_port: 80
+sms2_ip: 10.12.9.102
+sms2_port: 9080
+
+#-------selfmember
+fcs4exchange_ip: 10.12.2.84
+fcs4exchange_port: 15067
+fcs4member_ip: 10.12.2.84
+fcs4member_port: 15065
+fcs4capital_ip: 10.12.2.84
+fcs4capital_port: 15063
+fundpay_ip: 10.12.2.84
+fundpay_port: 15010
+firmSign: S
+
+
+#-------aeweb
+aedelivery1_ip: 10.12.2.84
+aedelivery1_port: 18060
+aedelivery2_ip: 10.12.2.84
+aedelivery2_port: 28060
+
+#-------fmtradeweb
+fmtradecache1_ip: 10.12.2.84
+fmtradecache1_port: 38011
+fmtradecache2_ip: 10.12.2.84
+fmtradecache2_port: 48011
+
+#-------fmtradeweb
+fmfirmPlatform1_ip: 10.12.2.84
+fmfirmPlatform1_port: 8822
+fmfirmPlatform2_ip: 10.12.2.84
+fmfirmPlatform2_port: 8822
+#-------UnityUserV3
+UnityUserV3_ip: 10.12.2.84
+
+### DB_trade
+tradedb1_ip: 10.12.2.84
+tradedb1_port: 1521
+tradedb1_sid: pmes
+tradedb2_ip: 10.12.2.84
+tradedb2_port: 1521
+tradedb2_sid: pmes
+tradedb_username: 94A8B21FF28A99A27208B736EB620678
+tradedb_username_view: trade
+tradedb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+tradedb_passwd_view: v3pass179
+tradedb_secureKey: 12345678
+
+### DB_funds
+fundsdb1_ip: 10.12.2.84
+fundsdb1_port: 1521
+fundsdb1_sid: pmes
+fundsdb2_ip: 10.12.2.84
+fundsdb2_port: 1521
+fundsdb2_sid: pmes
+fundsdb_username: E3124D9E4C4DB3CB706CFDEC89344DC4
+fundsdb_username_view: funds
+fundsdb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+fundsdb_passwd_view: v3pass179
+fundsdb_secureKey: 12345678
+
+### DB_masterdata
+masterdatadb1_ip: 10.12.2.84
+masterdatadb1_port: 1521
+masterdatadb1_sid: pmes
+masterdatadb2_ip: 10.12.2.84
+masterdatadb2_port: 1521
+masterdatadb2_sid: pmes
+masterdatadb_username: 097807E65575511848C05A268F15946C
+masterdatadb_username_view: masterdata
+masterdatadb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+masterdatadb_passwd_view: v3pass179
+masterdatadb_secureKey: 12345678
+
+### DB_settledb
+settledb1_ip: 10.12.2.84
+settledb1_port: 1521
+settledb1_sid: pmes
+settledb2_ip: 10.12.2.84
+settledb2_port: 1521
+settledb2_sid: pmes
+settledb_username: 4A4E6D73ECCC5A9E052F64896D77D66F
+settledb_username_view: settle
+settledb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+settledb_passwd_view: v3pass179
+settledb_secureKey: 12345678
+
+### DB_interest
+interestdb1_ip: 10.12.2.84
+interestdb1_port: 1521
+interestdb1_sid: pmes
+interestdb2_ip: 10.12.2.84
+interestdb2_port: 1521
+interestdb2_sid: pmes
+interestdb_username: 84BDF0AF6B9C50E60094F92BCD1BD417
+interestdb_username_view: interest
+interestdb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+interestdb_passwd_view: v3pass179
+interestdb_secureKey: 12345678
+
+### DB_query
+querydb1_ip: 10.12.2.84
+querydb1_port: 1521
+querydb1_sid: pmes
+querydb2_ip: 10.12.2.84
+querydb2_port: 1521
+querydb2_sid: pmes
+querydb_username: 6D53733AC4BE5DEB85D069F1F4D346FA
+querydb_username_view: query
+querydb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+querydb_passwd_view: v3pass179
+querydb_secureKey: 12345678
+
+### DB_crudeoil
+crudeo1_ip: 10.12.9.80
+crudeo1_port: 1521
+crudeo1_sid: pmes
+crudeo2_ip: 10.12.9.80
+crudeo2_port: 1521
+crudeo2_sid: pmes
+crudeo_username: 790D539CACB993BCB046EC301FA62CD7
+crudeo_username_view: crudeoil
+crudeo_passwd: A04FD040DB68785A126C257116D9EEE9
+crudeo_passwd_view: password
+crudeo_secureKey: 12345678
+
+### DB_monitor
+monitordb1_ip: 10.12.2.84
+monitordb1_port: 1521
+monitordb1_sid: pmes
+monitordb2_ip: 10.12.2.84
+monitordb2_port: 1521
+monitordb2_sid: pmes
+monitordb_username: 3E487C2FDC3D537032EEB601DD8A67F5
+monitordb_username_view: monitor
+monitordb_passwd: 468DE80F4782BC90C9F21CA5C01D78D1
+monitordb_passwd_view: v3pass179
+monitordb_secureKey: 12345678
+
+### DB_cms
+cmsdb1_ip: 10.12.2.84
+cmsdb1_port: 1521
+cmsdb1_sid: pmes
+cmsdb2_ip: 10.12.2.84
+cmsdb2_port: 1521
+cmsdb2_sid: pmes
+cmsdb_username: C178C0CFA2E5F06A1BD5223EDF5B7807
+cmsdb_username_view: tpmeaccount
+cmsdb_passwd: A04FD040DB68785A126C257116D9EEE9
+cmsdb_passwd_view: password
+cmsdb_secureKey: 12345678

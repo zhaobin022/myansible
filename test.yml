@@ -3,8 +3,7 @@
 #- hosts: "oggtarget01,oggsource01"
 - hosts: "all"
   tasks:
-    - echopong: get_facts=yes args='111'
-    - debug: msg={{ ansible_private_ipv4_address }}------------{{ args }}
+    - debug: msg={{ activemq_url }}
 #    - lineinfile:
 #        dest: /etc/httpd/conf/httpd.conf
 #        regexp: '^Listen '

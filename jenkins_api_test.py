@@ -1,14 +1,22 @@
 import jenkins
 
 username = 'admin'
-password = '2817f52c53c0e99f2c208ac761c1cee4'
+password = '4bddd47b09cf2043e859974d8508ffbc'
 
-server = jenkins.Jenkins('http://localhost:8080', username='admin', password='2817f52c53c0e99f2c208ac761c1cee4')
+server = jenkins.Jenkins('http://localhost:8080', username=username, password=password)
 
 job_name = 'test'
 
-param_dict = {'name1':'111','action_type':'rollback'}
-print server.build_job(job_name,parameters=param_dict)
+last_build_number = server.get_job_info(job_name)['lastCompletedBuild']['number']
+
+
+
+build_info = server.get_build_info(job_name, last_build_number)
+build_console_output = server.get_build_console_output(job_name,last_build_number)
+print server.get_job_config(job_name)
+#param_dict = {'name1':'111','action_type':'rollback'}
+
+#print server.build_job(job_name,parameters=param_dict)
 # param_dict = {}
 # data = server.get_job_info(job_name)
 # print data

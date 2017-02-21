@@ -33,35 +33,39 @@ class ResultsCollector(CallbackBase):
 
 class AnsibleApi2(object):
     def __init__(self):
-        self.host_info_dic = {
-            'dbservers': {
-                # 'hosts': ['oggsource', 'oggtarget','bindesktop'],
-                'hosts': ['oggsource01', 'oggtarget01', 'bindesktop01'],
-                # 'vars': {
-                #     'ansible_ssh_user': 'vagrant',
-                #     'ansible_ssh_private_key_file':
-                #         '~/.vagrant.d/insecure_private_key',
-                #     'example_variable': 'value'
-                # }
-            },
-            '_meta': {
-                'hostvars': {
-                    'oggsource01': {
-                        "ansible_ssh_user": "root",
-                        "ansible_ssh_pass": "rootroot"
-                    },
-                    'oggtarget01': {
-                        "ansible_ssh_user": "root",
-                        "ansible_ssh_pass": "rootroot"
-                    },
-                    'bindesktop01': {
-                        "ansible_ssh_user": "root",
-                        "ansible_ssh_pass": "123abc,.",
-                        "a": "b"
-                    }
-                }
-            }
-        }
+        # self.host_info_dic = {
+        #     'dbservers': {
+        #         # 'hosts': ['oggsource', 'oggtarget','bindesktop'],
+        #         'hosts': ['oggsource01', 'oggtarget01', 'bindesktop01'],
+        #         # 'vars': {
+        #         #     'ansible_ssh_user': 'vagrant',
+        #         #     'ansible_ssh_private_key_file':
+        #         #         '~/.vagrant.d/insecure_private_key',
+        #         #     'example_variable': 'value'
+        #         # }
+        #     },
+        #     '_meta': {
+        #         'hostvars': {
+        #             'oggsource01': {
+        #                 "ansible_ssh_user": "root",
+        #                 "ansible_ssh_pass": "rootroot"
+        #             },
+        #             'oggtarget01': {
+        #                 "ansible_ssh_user": "root",
+        #                 "ansible_ssh_pass": "rootroot"
+        #             },
+        #             'bindesktop01': {
+        #                 "ansible_ssh_user": "root",
+        #                 "ansible_ssh_pass": "123abc,.",
+        #                 "a": "b"
+        #             }
+        #         }
+        #     }
+        # }
+        print $deployapps
+        print $jobname
+        print $envid
+        self.host_file_path = 'hosts/b-hosts'
         self.Options = namedtuple('Options', ['connection','module_path', 'forks', 'timeout',  'remote_user',
                 'ask_pass', 'private_key_file', 'ssh_common_args', 'ssh_extra_args', 'sftp_extra_args',
                 'scp_extra_args', 'become', 'become_method', 'become_user', 'ask_value_pass', 'verbosity',
@@ -69,6 +73,7 @@ class AnsibleApi2(object):
         self.variable_manager = VariableManager()
         self.loader = DataLoader()
 
+        # self.variable_manager.add_group_vars_file()
         self.options = self.Options(connection='smart', module_path=None, forks=100, timeout=10,
                                remote_user='root', ask_pass=False, private_key_file=None, ssh_common_args=None,
                                ssh_extra_args=None,
@@ -76,26 +81,31 @@ class AnsibleApi2(object):
                                become_user='root', ask_value_pass=False, verbosity=None, check=False, listhosts=False,
                                listtasks=False, listtags=False, syntax=False)
         self.passwords = {}
-        self.host_list = ['oggsource01', 'oggtarget01']
-        self.inventory = Inventory(loader=self.loader, variable_manager=self.variable_manager,host_list=[])
-        self.init_inventory()
+        self.host_list = self.host_file_path
+        self.group_var_file_path = 'group_vars/all'
+        # self.group_var_file_path = 'group_vars/all_84'
+
+        self.variable_manager.add_group_vars_file(self.group_var_file_path,self.loader)
+        print self.variable_manager._group_vars_files
+        self.inventory = Inventory(loader=self.loader, variable_manager=self.variable_manager,host_list=self.host_list)
+        # self.init_inventory()
         self.variable_manager.set_inventory(self.inventory)
         self.results_callback = ResultsCollector()
 
 
-    def init_inventory(self):
-        for  k, v in self.host_info_dic.items():
-            if k != '_meta':
-                group_name = k
-                group_dic = v
-                group = Group(name=group_name)
-                for host_name in v['hosts']:
-                    host = Host(name=host_name)
-                    host.set_variable('ansible_ssh_host', host_name)
-                    host.set_variable('ansible_ssh_user', self.host_info_dic['_meta']['hostvars'][host_name]['ansible_ssh_user'])
-                    host.set_variable('ansible_ssh_pass', self.host_info_dic['_meta']['hostvars'][host_name]['ansible_ssh_pass'])
-                    group.add_host(host)
-                self.inventory.add_group(group)
+    # def init_inventory(self):
+        # for  k, v in self.host_info_dic.items():
+        #     if k != '_meta':
+        #         group_name = k
+        #         group_dic = v
+        #         group = Group(name=group_name)
+        #         for host_name in v['hosts']:
+        #             host = Host(name=host_name)
+        #             host.set_variable('ansible_ssh_host', host_name)
+        #             host.set_variable('ansible_ssh_user', self.host_info_dic['_meta']['hostvars'][host_name]['ansible_ssh_user'])
+        #             host.set_variable('ansible_ssh_pass', self.host_info_dic['_meta']['hostvars'][host_name]['ansible_ssh_pass'])
+        #             group.add_host(host)
+        #         self.inventory.add_group(group)
 
         # print self.inventory.get_group_dict()
 
@@ -136,7 +146,7 @@ class AnsibleApi2(object):
               """
         extra_vars = {}  # 额外的参数 sudoers.yml以及模板中的参数，它对应ansible-playbook test.yml --extra-vars "host='aa' name='cc' "
         host_list_str = ','.join([item for item in self.host_list])
-        extra_vars['host_list'] = host_list_str
+        # extra_vars['host_list'] = host_list_str
         playbook_path = 'test.yml'  # modify here, change playbook
         self.variable_manager.extra_vars=extra_vars
         # variable_manager.extra_vars = {"test": "pong111111111111111",} # modify here, This can accomodate various other command line arguments.`
@@ -176,3 +186,4 @@ if __name__ == '__main__':
     ansible_handler.run_playbook()
     # ansible_handler.run_module()
     print ansible_handler.get_result()
+    # ansible_handler.get_result()
